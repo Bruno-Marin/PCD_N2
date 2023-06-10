@@ -25,6 +25,7 @@ plt.xlabel('Produto')
 plt.xticks(rotation=45, ha='right', fontsize=10)
 plt.ylabel('Quantidade de Vendas')
 plt.yticks(fontsize=10)
+# Ajustar layout do gráfico.
 plt.tight_layout(pad=0.5)
 plt.show()
 
