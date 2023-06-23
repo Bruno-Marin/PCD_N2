@@ -10,6 +10,11 @@ df_produtos = pd.read_excel('produtos.xlsx')
 df_compras.dropna(inplace=True)
 df_produtos.dropna(inplace=True)
 
+#conversão para tipos de dados.
+compras_df['Quantidade'] = compras_df['Quantidade'].astype(int)
+compras_df['Data'] = pd.to_datetime(compras_df['Data'])
+produtos_df['Preço'] = produtos_df['Preço'].astype(float)
+
 #3. Calcule o total de vendas de cada produto e crie um gráfico de barras para visualizar os resultados com Matplotlib, ou outra biblioteca de sua escolha.
 
 # Uso da função merge para combinar os df_compras e df_produtos, usando o argumento on='Produto' para indicar que a junção deve usar como base a coluna 'Produto', how='left' para preservar todas as linhas do dataframe.
