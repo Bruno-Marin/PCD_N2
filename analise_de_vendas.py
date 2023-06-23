@@ -10,6 +10,8 @@ df_produtos = pd.read_excel('produtos.xlsx')
 df_compras.dropna(inplace=True)
 df_produtos.dropna(inplace=True)
 
+#3. Calcule o total de vendas de cada produto e crie um gráfico de barras para visualizar os resultados com Matplotlib, ou outra biblioteca de sua escolha.
+
 # Uso da função merge para combinar os df_compras e df_produtos, usando o argumento on='Produto' para indicar que a junção deve usar como base a coluna 'Produto', how='left' para preservar todas as linhas do dataframe.
 df_compras = df_compras.merge(df_produtos[['Produto', 'Preço']], on='Produto', how='left')
 
@@ -17,15 +19,32 @@ df_compras = df_compras.merge(df_produtos[['Produto', 'Preço']], on='Produto', 
 df_compras['Receita'] = df_compras['Quantidade'] * df_compras['Preço']
 
 # Uso da função groupby para unir valores da coluna produto e a função sum para somar o valores da coluna quantidade.
-df_compras = df_compras.groupby('Produto')['Quantidade','Receita'].sum()
 
-df_compras.plot(kind='bar', y='Receita', width=0.8)
+vendas_por_produto = df_compras.groupby('Produto')['Receita'].sum()
+
+vendas_por_produto.plot(kind='bar', y='Receita', width=0.8)
 plt.title('Total de Vendas por Produto')
 plt.xlabel('Produto')
 plt.xticks(rotation=45, ha='right', fontsize=10)
 plt.ylabel('Quantidade de Vendas')
 plt.yticks(fontsize=10)
-# Ajustar layout do gráfico.
-plt.tight_layout(pad=0.5)
 plt.show()
 
+# 4. Determine os 5 principais clientes que fizeram mais compras e exiba seus nomes junto com o número de pedidos que fizeram.
+top_clientes = df_compras['Cliente'].value_counts().head(5)
+print('Os 5 principais clientes que fizeram mais compras:')
+print(top_clientes)
+
+plt.bar(top_clientes.index, top_clientes.values)
+plt.title('Os 5 principais clientes que fizeram mais compras')
+plt.xlabel('Cliente')
+plt.ylabel('Número de Compras')
+plt.xticks(rotation=45)
+plt.show()
+
+
+# 6. Identifique o produto que gerou a maior receita e calcule a contribuição percentual de suas vendas para a receita total.
+
+# 7. Calcule o preço médio por unidade para cada categoria de produto e exiba os resultados em formato tabular.
+
+# 8. Crie uma análise ou visualização adicional, que achar interessante ou relevante, para o conjunto de dados
