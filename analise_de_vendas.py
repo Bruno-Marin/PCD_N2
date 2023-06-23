@@ -2,7 +2,7 @@
 import pandas as pd
 import matplotlib.pyplot as plt
 
-# 1 - Caregando os arquvivos xlsx produto e compras em dataframes.
+# 1 - Carregando os arquvivos xlsx produto e compras em dataframes.
 df_compras = pd.read_excel('compras.xlsx')
 df_produtos = pd.read_excel('produtos.xlsx')
 
