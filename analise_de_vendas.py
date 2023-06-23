@@ -22,6 +22,7 @@ df_compras['Receita'] = df_compras['Quantidade'] * df_compras['Preço']
 
 vendas_por_produto = df_compras.groupby('Produto')['Receita'].sum()
 
+#Gráfico de barras.
 vendas_por_produto.plot(kind='bar', y='Receita', width=0.8)
 plt.title('Total de Vendas por Produto')
 plt.xlabel('Produto')
@@ -35,12 +36,17 @@ top_clientes = df_compras['Cliente'].value_counts().head(5)
 print('Os 5 principais clientes que fizeram mais compras:')
 print(top_clientes)
 
-plt.bar(top_clientes.index, top_clientes.values)
+plt.bar(top_clientes.index, top_clientes.values, color='blue')
 plt.title('Os 5 principais clientes que fizeram mais compras')
 plt.xlabel('Cliente')
 plt.ylabel('Número de Compras')
-plt.xticks(rotation=45)
+plt.xticks(fontsize=8)
+
+for i, v in enumerate(top_clientes.values):
+    plt.text(i, v + -1, str(v), ha='center', va='bottom')
+    
 plt.show()
+
 
 
 # 6. Identifique o produto que gerou a maior receita e calcule a contribuição percentual de suas vendas para a receita total.
